@@ -15,7 +15,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   getUser()async{
     emit(SettingsLoading());
-      await apiServices.get(endPoints: 'profile').then((value) => {
+      await apiServices.get(endPoints: 'profile',auth: true).then((value) => {
     
         print('sss'),
         print(value.data),
@@ -34,7 +34,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   updateUser({required String name,required String email,required String phone})async{
     emit(UpdateLoading());
-      await apiServices.put(
+      await apiServices.put(auth: true,
         endPoints: 'update-profile',
         data: {
           'name':name,

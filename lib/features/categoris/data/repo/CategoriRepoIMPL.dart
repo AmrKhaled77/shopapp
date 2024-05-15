@@ -12,7 +12,7 @@ class CategoriRepoIMPL implements CategoriRepo{
   Future<Either<Failure, CategoriModel>> GetCategoriData()async {
 
     try {
-      var  responce =await apiServices.get(endPoints: 'categories');
+      var  responce =await apiServices.get(endPoints: 'categories',auth: false);
 
       print(responce.data.toString());
 

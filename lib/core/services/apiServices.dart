@@ -7,9 +7,7 @@ class ApiServices{
     BaseOptions( 
       baseUrl: "https://student.valuxapps.com/api/",
       headers: {
-        'Content-Type': 'application/json',
-        'lang':'en',
-         'Authorization':Token
+
 
       }
     )
@@ -17,9 +15,18 @@ class ApiServices{
   final  _baseUrl="https://student.valuxapps.com/api/";
 
 
-  Future<Response> get({required String endPoints})async{
+  Future<Response> get({required String endPoints,required bool auth})async{
 
-  var response = await  _dio.get('$_baseUrl$endPoints');
+  var response = await  _dio.get('$_baseUrl$endPoints',
+      options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+            'lang':'en',
+            if(auth)
+              'Authorization':Token
+          }
+      )
+  );
   return response;
   }
 
@@ -28,13 +35,23 @@ class ApiServices{
     required String endPoints,
     Map<String,dynamic>? query,
    required Map<String,dynamic>? data,
+    required bool auth,
+
 
   }
       )async{
 
     var response = await  _dio.post(endPoints,
       data: data,
-      queryParameters: query
+      queryParameters: query,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/json',
+          'lang':'en',
+          if(auth)
+          'Authorization':Token
+        }
+      )
 
 
     );
@@ -44,13 +61,22 @@ class ApiServices{
     required String endPoints,
     Map<String,dynamic>? query,
     required Map<String,dynamic>? data,
+    required bool auth
 
   }
       )async{
 
     var response = await  _dio.put(endPoints,
         data: data,
-        queryParameters: query
+        queryParameters: query,
+        options: Options(
+            headers: {
+              'Content-Type': 'application/json',
+              'lang':'en',
+              if(auth)
+                'Authorization':Token
+            }
+        )
 
 
     );

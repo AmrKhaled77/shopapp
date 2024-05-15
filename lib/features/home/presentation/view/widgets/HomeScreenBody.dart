@@ -20,7 +20,13 @@ class HomeScreenBody extends StatelessWidget {
     return BlocBuilder<HomeCubit,HomeState>(
       builder: (BuildContext context, HomeState state) {
 
-         if(state is HomeGetDataLoadingState){
+
+        if(state is HomeGetDataLoadingState){
+
+          return const Center(child: CircularProgressIndicator());
+         }
+        if(BlocProvider.of<HomeCubit>(context).HomeData==null){
+
           return const Center(child: CircularProgressIndicator());
          }
          else{
@@ -50,7 +56,7 @@ class HomeScreenBody extends StatelessWidget {
                    ),
 
 
-                   items: BlocProvider.of<HomeCubit>(context).HomeData.data.banners.map((i) {
+                   items: BlocProvider.of<HomeCubit>(context).HomeData!.data.banners.map((i) {
                      return Builder(
                        builder: (BuildContext context) {
                          return CachedNetworkImage(
@@ -90,7 +96,7 @@ class HomeScreenBody extends StatelessWidget {
                  crossAxisSpacing: 3,
 
                  physics: const NeverScrollableScrollPhysics(),
-                 children: List.generate(BlocProvider.of<HomeCubit>(context).HomeData.data.products.length,
+                 children: List.generate(BlocProvider.of<HomeCubit>(context).HomeData!.data.products.length,
                          (index) =>ProdectItem(index: index,)
 
 

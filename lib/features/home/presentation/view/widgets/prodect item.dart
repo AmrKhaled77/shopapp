@@ -42,12 +42,12 @@ class ProdectItem extends StatelessWidget {
                 CachedNetworkImage(
                   height: 200,
                   width:double.infinity ,
-                  imageUrl: BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].image,
+                  imageUrl: BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].image,
                   placeholder: (context, url) => Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
 
-                if(BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].discount!=0)
+                if(BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].discount!=0)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 3),
                   child: Container(
@@ -65,7 +65,7 @@ class ProdectItem extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].name,
+              child: Text(BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].name,
               maxLines: 2,
                 overflow: TextOverflow.ellipsis,
 
@@ -74,7 +74,7 @@ class ProdectItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
-              children: [  Text("${BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].price!.round().toString()} EPG",
+              children: [  Text("${BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].price!.round().toString()} EPG",
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style:const TextStyle(
@@ -84,8 +84,8 @@ class ProdectItem extends StatelessWidget {
 
               ),
                 const SizedBox(width: 10,),
-                if(BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].discount!=0)
-                Text("${BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].oldPrice!.round().toString()} EPG",
+                if(BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].discount!=0)
+                Text("${BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].oldPrice!.round().toString()} EPG",
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
@@ -95,12 +95,25 @@ class ProdectItem extends StatelessWidget {
                   ),
 
                 ),
-                Spacer(),
+               const  Spacer(),
+
                 IconButton(
 
-                    onPressed: (){}, icon: Icon(
-                    Icons.favorite_border
-                ))
+
+
+                    onPressed: (){
+                      BlocProvider.of<HomeCubit>(context).ChangeFavorite(productId:
+                      BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].id);
+
+                    }, icon: Container(
+
+                      child: Icon(
+                      color: BlocProvider.of<HomeCubit>(context).favorite!
+                          [BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].id]!?
+                          Colors.red :Colors.grey,
+                      Icons.favorite
+                                      ),
+                    ))
 
 
 

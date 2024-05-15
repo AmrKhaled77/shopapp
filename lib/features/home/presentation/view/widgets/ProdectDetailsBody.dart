@@ -48,7 +48,7 @@ class ProdectDeatilsBody extends StatelessWidget {
                 ),
 
 
-                items: BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].images.map((i) {
+                items: BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].images.map((i) {
                   return Builder(
                     builder: (BuildContext context) {
                       return CachedNetworkImage(
@@ -61,7 +61,7 @@ class ProdectDeatilsBody extends StatelessWidget {
                     },
                   );
                 }).toList(),
-              ),  if(BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].discount!=0)
+              ),  if(BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].discount!=0)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 3),
                 child: Container(
@@ -78,7 +78,7 @@ class ProdectDeatilsBody extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].name,
+            child: Text(BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].name,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
 
@@ -87,7 +87,7 @@ class ProdectDeatilsBody extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Row(
-              children: [  Text("${BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].price!.round().toString()} EPG",
+              children: [  Text("${BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].price!.round().toString()} EPG",
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style:const TextStyle(
@@ -97,8 +97,8 @@ class ProdectDeatilsBody extends StatelessWidget {
 
               ),
                 const SizedBox(width: 10,),
-                if(BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].discount!=0)
-                  Text("${BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].oldPrice!.round().toString()} EPG",
+                if(BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].discount!=0)
+                  Text("${BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].oldPrice!.round().toString()} EPG",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -133,7 +133,7 @@ class ProdectDeatilsBody extends StatelessWidget {
            Padding(
             padding: EdgeInsets.all(24.0),
             child:ReadMoreText(
-              BlocProvider.of<HomeCubit>(context).HomeData.data.products[index].description,
+              BlocProvider.of<HomeCubit>(context).HomeData!.data.products[index].description,
 
               trimMode: TrimMode.Line,
               trimLines: 10,

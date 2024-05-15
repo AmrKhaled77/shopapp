@@ -15,7 +15,7 @@ class RegesterRepoImpl implements RegisterRepo{
 
 
     try {
-      var  responce =await apiServices.post(endPoints: 'register', data: {
+      var  responce =await apiServices.post(endPoints: 'register',auth: false, data: {
 
         'email':email,
         'password': password,

@@ -15,7 +15,7 @@ class SearchIMPL implements SEarchRepo{
   @override
   Future<Either<Failure, SearchModel>> GetSearchData({required String key}) async{
     try {
-      var responce= await apiServices.post(endPoints: 'products/search', data: {
+      var responce= await apiServices.post(endPoints: 'products/search',auth: false, data: {
         'text':key,
 
       });

@@ -9,14 +9,13 @@ import 'package:untitled1/features/login/presentation/view/LoginScreen.dart';
 import 'features/categoris/data/repo/CategoriRepoIMPL.dart';
 import 'features/categoris/presentation/viewModel/catrgori Cubit/catigori_cubit.dart';
 import 'features/home/presentation/view/HomePage.dart';
-import 'features/home/presentation/viewModel/bottom navigation bar cubit/bottom_navigation_bar_cubit.dart';
 import 'features/settings/presentation/ViewModel/SettingsBloc/settings_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await cacheHelper.init();
-
+ await  HomeCubit(HomeRepoIMPL())..getHomeData()..getFavorite();
  try{
    Token= await cacheHelper.getdata(key: 'token');
  }catch(e){
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider<HomeCubit>(
-        create: (BuildContext context) => HomeCubit(HomeRepoIMPL())..getHomeData(),
+        create: (BuildContext context) =>  HomeCubit(HomeRepoIMPL())..getHomeData()..getFavorite(),
 
       ), BlocProvider<CatigoriCubit>(
         create: (context) => CatigoriCubit(CategoriRepoIMPL())..getCategoriData(),
@@ -43,6 +42,7 @@ class MyApp extends StatelessWidget {
     create: (BuildContext context) { return   SettingsCubit()..getUser();
     }
     ),
+
 
 
     ],
@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
 
 
-        home:  GetMainScreen()
+        home:  HomePage()
       )
     );
 

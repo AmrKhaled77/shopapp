@@ -15,7 +15,7 @@ class HomeRepoIMPL implements HomeRepo {
   Future<Either<Failure, HomeModel>> GetHomeData()async {
 
     try {
-      var  responce =await apiServices.get(endPoints: 'home');
+      var  responce =await apiServices.get(endPoints: 'home',auth: true);
 
 
 
